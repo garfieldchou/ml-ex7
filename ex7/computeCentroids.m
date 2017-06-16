@@ -26,15 +26,8 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-idxM = zeros(K, m);
-numC = zeros(K, 1);
-
-for i = 1:m
-    idxM(idx(i), i) = 1;
-    numC(idx(i)) += 1;
-end
-
-centroids = (idxM * X) ./ (numC * ones(1,n))
+idxM = eye(K)(:, idx');
+centroids = (idxM * X) ./ (sum(idxM, 2) * ones(1,n))
 
 % =============================================================
 
